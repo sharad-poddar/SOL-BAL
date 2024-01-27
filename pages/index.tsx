@@ -9,6 +9,7 @@ const Home: NextPage = () => {
   // states for balances and address
   const [balance, setBalance] = useState(0)
   const [address, setAddress] = useState('')
+  const [executables, setExecutables] = useState(false);
 
   // passing this into another component as prop
   const addressSubmittedHandler = (address: string) => {
@@ -26,8 +27,14 @@ const Home: NextPage = () => {
       
       // in this we get balance in SOLANA
       connection.getBalance(key).then(res => {
-      console.log(res);
-      setBalance(res/LAMPORTS_PER_SOL);
+        console.log(res);
+        setBalance(res/LAMPORTS_PER_SOL);
+      })
+
+
+      connection.getAccountInfo(key).then(res =>{
+        console.log(res);
+        setExecutables(res.executable);
       })
 
     }catch(error){
@@ -47,6 +54,7 @@ const Home: NextPage = () => {
         <AddressForm handler={addressSubmittedHandler} />
         <p>{`Address: ${address}`}</p>
         <p>{`Balance: ${balance} SOL`}</p>
+        <p>{`is Exectubales are there: ${executables}`}</p>
       </header>
     </div>
   )
