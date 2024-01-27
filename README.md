@@ -1,3 +1,3 @@
 for start 
-npm run dev
-[localhost](http://localhost:3000/)http://localhost:3000/
+npm run dev, then click on this link
+[localhost](http://localhost:3000/)
